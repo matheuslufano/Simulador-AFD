@@ -65,3 +65,44 @@
     .btn-secundario:hover {
       background-color: #047857;
     }
+
+.btn-social {
+  display: flex;
+  flex-direction: column; /* empilha verticalmente */
+  align-items: center;    /* centraliza horizontalmente */
+  gap: 10px;              /* espaço entre botão e texto */
+  margin-top: 20px;
+}
+
+.btn-social p {
+  margin-bottom: 0px;
+  font-size: 1.1em;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.btn-social a button {
+  background-color: #a74ef5; /* azul padrão */
+  border: none;
+  border-radius: 50%; /* botão redondo */
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.4);
+}
+
+.btn-social a button:hover {
+  background-color: #7f0bfb; /* azul mais escuro no hover */
+  transform: scale(1.1); /* efeito de leve zoom */
+  box-shadow: 0 5px 15px rgba(29, 78, 216, 0.6);
+}
+
+.btn-social a {
+  text-decoration: none;
+}

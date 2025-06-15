@@ -6,6 +6,8 @@ Este projeto consiste em um **Simulador de Autômato Finito Determinístico (AFD
 
 É uma ferramenta educacional útil para estudantes e entusiastas de teoria da computação, automação e linguagens formais.
 
+[👉 Clique aqui para ser direcionado para o varcel](https://simulador-afd.vercel.app/index.html)
+
 ## Funcionalidades
 
 - Simulação interativa de Autômatos Finitos Determinísticos.

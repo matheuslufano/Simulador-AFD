@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Diagrama de AFD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+</head>
+
+  <body>
+    <div class="header">
+      <button class="btn-voltar" onclick="window.location.href='../../../index.html'" aria-label="Voltar">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <h1>Gerador de Diagrama de AFD</h1>
+    </div>
+
+  <div class="container">
+    <label>Estados (separados por vírgula):
+      <input type="text" id="estados" value="q0,q1,q2">
+    </label>
+
+    <label>Alfabeto (separado por vírgula):
+      <input type="text" id="alfabeto" value="a,b">
+    </label>
+
+    <label>Estado Inicial:
+      <input type="text" id="inicial" value="q0">
+    </label>
+
+    <label>Estados de Aceitação (separados por vírgula):
+      <input type="text" id="finais" value="q2">
+    </label>
+
+    <label>Transições (uma por linha no formato estado,símbolo,estado):
+      <textarea id="transicoes" rows="5">q0,a,q1
+  q1,b,q2
+  q2,a,q2
+  q2,b,q2</textarea>
+    </label>
+
+    <button onclick="desenhar()">Gerar Diagrama</button>
+  </div>
+
+  <canvas id="canvas" width="800" height="600"></canvas>
+
+  <script>
+  function desenhar() {
+    const estados = document.getElementById('estados').value.split(',').map(e => e.trim());
+    const inicial = document.getElementById('inicial').value.trim();
+    const finais = document.getElementById('finais').value.split(',').map(e => e.trim());
+    const transicoesTexto = document.getElementById('transicoes').value.trim().split('\n');
+
+    const transicoes = [];
+    for (let linha of transicoesTexto) {
+      const [de, simbolo, para] = linha.split(',').map(e => e.trim());
+      transicoes.push({ de, simbolo, para });
+    }
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 200;
+    const estadoRadius = 40;
+
+    const posicoes = {};
+    estados.forEach((estado, i) => {
+      const angle = (i / estados.length) * 2 * Math.PI;
+      posicoes[estado] = {
+        x: centerX + radius * Math.cos(angle),
+        y: centerY + radius * Math.sin(angle)
+      };
+    });
+
+    ctx.font = '16px Arial';
+
+    transicoes.forEach(({ de, simbolo, para }) => {
+      const from = posicoes[de];
+      const to = posicoes[para];
+
+      if (de === para) {
+        ctx.beginPath();
+        ctx.arc(from.x, from.y - estadoRadius, 20, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fillText(simbolo, from.x - 10, from.y - estadoRadius - 25);
+      } else {
+        const angle = Math.atan2(to.y - from.y, to.x - from.x);
+        const offsetX = estadoRadius * Math.cos(angle);
+        const offsetY = estadoRadius * Math.sin(angle);
+
+        const startX = from.x + offsetX;
+        const startY = from.y + offsetY;
+        const endX = to.x - offsetX;
+        const endY = to.y - offsetY;
+
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+
+        const arrowAngle = Math.PI / 8;
+        const arrowLength = 10;
+        const angle1 = angle + arrowAngle;
+        const angle2 = angle - arrowAngle;
+
+        ctx.beginPath();
+        ctx.moveTo(endX, endY);
+        ctx.lineTo(endX - arrowLength * Math.cos(angle1), endY - arrowLength * Math.sin(angle1));
+        ctx.moveTo(endX, endY);
+        ctx.lineTo(endX - arrowLength * Math.cos(angle2), endY - arrowLength * Math.sin(angle2));
+        ctx.stroke();
+
+        const labelX = (startX + endX) / 2;
+        const labelY = (startY + endY) / 2;
+        ctx.fillText(simbolo, labelX, labelY - 5);
+      }
+    });
+
+    estados.forEach(estado => {
+      const { x, y } = posicoes[estado];
+
+      ctx.beginPath();
+      ctx.arc(x, y, estadoRadius, 0, 2 * Math.PI);
+      ctx.stroke();
+
+      if (finais.includes(estado)) {
+        ctx.beginPath();
+        ctx.arc(x, y, estadoRadius - 5, 0, 2 * Math.PI);
+        ctx.stroke();
+      }
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(estado, x, y);
+    });
+
+    const inicialPos = posicoes[inicial];
+    ctx.beginPath();
+    ctx.moveTo(inicialPos.x - estadoRadius - 30, inicialPos.y);
+    ctx.lineTo(inicialPos.x - estadoRadius, inicialPos.y);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(inicialPos.x - estadoRadius, inicialPos.y);
+    ctx.lineTo(inicialPos.x - estadoRadius - 10, inicialPos.y - 5);
+    ctx.lineTo(inicialPos.x - estadoRadius - 10, inicialPos.y + 5);
+    ctx.closePath();
+    ctx.fill();
+  }
+  </script>
+
+  </body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de AFD - Apresentação</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #9bfaf6, #fdb5cc);
+      color: #1f2937;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.8em;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    p {
+      margin-bottom: 30px;
+      font-size: 1.1em;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      font-size: 1rem;
+      background-color: #2563eb;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      margin: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #1d4ed8;
+      transform: scale(1.05);
+    }
+
+    .btn-secundario {
+      background-color: #059669;
+    }
+
+    .btn-secundario:hover {
+      background-color: #047857;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Simulador de AFD</h1>
+    <p>Bem-vindo! Aqui você pode <strong>simular</strong> seu Autômato Finito Determinístico ou <strong>gerar o diagrama visual</strong> do seu AFD.</p>
+
+    <button class="btn" onclick="window.location.href='./src/app/simulador/'">
+      Simulador Gráfico de AFD
+    </button>
+    <br>
+    <button class="btn btn-secundario" onclick="window.location.href='./src/app/gerador/index.html'">
+      Gerador de Diagrama de AFD
+    </button>
+  </div>
+  
+</body>
+</html>

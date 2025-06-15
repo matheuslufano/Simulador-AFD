@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Gráfico de AFD</title>
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back" />
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+      .header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    }
+
+    h2 {
+      margin: 40px;
+      margin-left: 10%;
+    }
+
+    .btn-voltar {
+      padding: 8px 12px;
+      font-size: 20px; /* tamanho maior para a seta */
+      background-color: #d3e3f0;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+    }
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+
+    .btn-voltar:hover {
+      background-color: #21a1f1;
+    }
+
+    canvas {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+    }
+
+    #controls {
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 8px 16px;
+      margin: 5px;
+      background-color: #61dafb;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #21a1f1;
+    }
+
+    .log {
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <!-- Botão Voltar no topo esquerdo -->
+  <section class="header">
+    <button class="btn-voltar" onclick="window.location.href='../../../index.html'" aria-label="Voltar">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h2>Simulador Gráfico de AFD</h2>
+  </section>
+
+
+
+    <canvas id="automatoCanvas" width="600" height="300"></canvas>
+
+    <div id="controls">
+      <label>Entrada: <input id="entrada" value="abba" /></label>
+      <button onclick="simular()">Simular</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="log">
+      <pre id="log"></pre>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
